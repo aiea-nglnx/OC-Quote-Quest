@@ -6,7 +6,7 @@ Claude Impact Lab: UCI × SoCal Affordable Housing (Nov 7, 2026) Participant rep
 > For a small housing nonprofit, a congregation with an underused lot, or city housing staff: OC Quote Quest checks Orange County parcels against California's new housing laws and public hazard maps, then shows which laws might open each site, what rules it out, and what is still unknown.
 
 **Team:** Handoff
-**Members:** [names]
+**Members:** Angelina A. Pao, Harshal
 **Lane:** 1 Find it
 **Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
 
@@ -39,6 +39,11 @@ A single-page web app (`oc-quote-quest.html`) and a small Python server (`server
 - **Demo tour:** an 8-step guided walkthrough with presenter notes (open `/?tour`). The full demo script is in `DEMO.md`.
 
 Screenshot: [add after first live run]
+
+
+<img width="1310" height="962" alt="image" src="https://github.com/user-attachments/assets/ecb0eb7c-a178-48a0-8eec-d0bd7d752ce6" />
+<img width="1312" height="952" alt="image" src="https://github.com/user-attachments/assets/40946b6b-487f-4339-994d-c6b7194144f6" />
+<img width="1315" height="957" alt="image" src="https://github.com/user-attachments/assets/19f3a73a-757e-4734-bd20-5c73a727fdd6" />
 
 **Demo video:** [link, or "uploaded on the hub"]
 **Live demo:** [link, optional]
