@@ -45,7 +45,7 @@ Screenshot: [add after first live run]
 <img width="1312" height="952" alt="image" src="https://github.com/user-attachments/assets/40946b6b-487f-4339-994d-c6b7194144f6" />
 <img width="1315" height="957" alt="image" src="https://github.com/user-attachments/assets/19f3a73a-757e-4734-bd20-5c73a727fdd6" />
 
-**Demo video:** [link, or "uploaded on the hub"]
+**Demo video:** UPLOADED HERE
 **Live demo:** [link, optional]
 
 ## How Claude is used
