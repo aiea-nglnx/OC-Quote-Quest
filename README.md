@@ -1,4 +1,4 @@
-# OC-Quote-Quest
+# OC-Quote-Quest (Angelina MAIN w/ Harshal)
 Claude Impact Lab: UCI × SoCal Affordable Housing (Nov 7, 2026) Participant repo
 
 # OC Quote Quest - LANE 1
