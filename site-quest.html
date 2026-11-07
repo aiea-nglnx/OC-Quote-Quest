@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OC Quote Quest · Housing site screening for Orange County</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --cream:#f7f2e9;--paper:#fffdf8;--line:#e6dccb;--ink:#3d3a35;--soft:#7c7468;
+ --sage:#8fb09b;--sage-d:#5f8a72;--clay:#d99a7b;--clay-d:#c07a5a;--dusk:#7d90b5;--butter:#f3dc9b;--rose:#e7b7ab;
+ --ok:#5f8a72;--no:#c27463;--unk:#c79a3e;--r:22px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Figtree,system-ui,sans-serif;color:var(--ink);background:var(--cream);
+ background-image:radial-gradient(circle at 15% 10%,#fbe9d7 0,transparent 40%),radial-gradient(circle at 90% 80%,#e3efe6 0,transparent 45%)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0}
+.hand{font-family:Caveat,cursive}
+a{color:var(--sage-d)}
+
+/* top */
+body{display:flex;flex-direction:column;height:100vh}
+header{position:relative;margin:16px 26px 18px;padding:18px 26px 34px;border-radius:var(--r);overflow:hidden;
+ background:linear-gradient(120deg,#fbeee0 0%,#f6efe2 45%,#e6f0e8 100%);box-shadow:0 10px 30px #3d3a3512;display:flex;align-items:center;gap:22px;flex:none}
+header .sun{position:absolute;right:30%;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(#f8e3a8,#f3dc9b00 70%);animation:glow 6s ease-in-out infinite}
+@keyframes glow{50%{transform:scale(1.12);opacity:.8}}
+header .town{position:absolute;left:0;right:0;bottom:-2px;height:46px;pointer-events:none}
+.brand{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.logo{width:58px;height:58px;border-radius:18px;background:linear-gradient(145deg,var(--sage),var(--sage-d));display:grid;place-items:center;box-shadow:0 10px 22px #5f8a7244;transform:rotate(-6deg);transition:transform .4s}
+.logo:hover{transform:rotate(4deg) scale(1.05)}
+.eyebrow{font:600 11.5px Figtree;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-d)}
+header h1{font-size:40px;line-height:1;font-weight:700;letter-spacing:-.02em}
+header h1 em{font-style:italic;font-weight:400;color:var(--clay-d)}
+.tagline{color:var(--soft);font-size:14.5px;margin-top:4px}
+.tagline .hand{font-size:19px;color:var(--clay-d)}
+.stats{display:flex;gap:10px;margin-left:auto;position:relative;z-index:1}
+.stat{background:#fffdf8cc;backdrop-filter:blur(4px);border-radius:16px;padding:8px 14px;text-align:center;min-width:86px}
+.stat b{display:block;font:700 22px Fraunces;color:var(--ink)}.stat span{font-size:11.5px;color:var(--soft)}
+header nav{position:relative;z-index:1}
+@media(max-width:1000px){.stats{display:none}header h1{font-size:30px}}
+nav{margin-left:auto;display:flex;background:#efe7d9;border-radius:999px;padding:4px}
+nav button{border:0;background:none;font:600 14px Figtree;color:var(--soft);padding:9px 18px;border-radius:999px;cursor:pointer;transition:.25s}
+nav button.on{background:var(--paper);color:var(--ink);box-shadow:0 2px 8px #0000001a}
+
+/* layout */
+.stage{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;padding:0 26px 26px;flex:1;min-height:0}
+@media(max-width:900px){.stage{grid-template-columns:1fr;height:auto}#map{height:380px}}
+.mapwrap{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:0 18px 40px #3d3a3522;border:6px solid var(--paper)}
+#map{width:100%;height:100%;background:#e8e2d6}
+.leaflet-tile-pane{filter:sepia(.25) saturate(.75) brightness(1.04) hue-rotate(-8deg)}
+.maptip{position:absolute;left:18px;bottom:18px;z-index:500;background:#fffdf8ee;backdrop-filter:blur(6px);padding:10px 14px;border-radius:14px;font-size:14px;box-shadow:0 6px 18px #0002;max-width:70%}
+.maptip b{color:var(--clay-d)}
+.coords{position:absolute;right:16px;top:16px;z-index:500;background:#fffdf8ee;border-radius:12px;padding:6px 10px;font-size:13px;color:var(--soft)}
+.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--clay);transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 4px 10px #0004;animation:drop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes drop{from{transform:translateY(-40px) rotate(-45deg);opacity:0}}
+
+.journal{background:var(--paper);border-radius:var(--r);box-shadow:0 18px 40px #3d3a3518;overflow:auto;padding:26px 28px;position:relative;
+ background-image:repeating-linear-gradient(transparent 0 31px,#f1e9db 31px 32px)}
+.journal::-webkit-scrollbar{width:8px}.journal::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+
+.guide{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.face{flex:none;width:58px;height:58px;border-radius:50%;background:var(--butter);display:grid;place-items:center;font-size:30px;box-shadow:inset 0 -4px 0 #0000000f;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{transform:translateY(-3px) rotate(-3deg)}}
+.say{background:#f4efe4;border-radius:4px 18px 18px 18px;padding:12px 16px;line-height:1.5;font-size:15.5px;min-height:58px}
+.say .hand{font-size:22px;color:var(--clay-d);display:block;line-height:1}
+
+.path{display:flex;align-items:center;margin:4px 0 22px}
+.path .dot{width:30px;height:30px;border-radius:50%;background:#efe7d9;color:var(--soft);display:grid;place-items:center;font:600 13px Figtree;transition:.4s;flex:none}
+.path .bar{flex:1;height:3px;background:#efe7d9;position:relative;overflow:hidden}
+.path .bar i{position:absolute;inset:0;background:var(--sage);transform:scaleX(0);transform-origin:left;transition:transform .6s}
+.path .on .dot,.path .dot.on{background:var(--sage);color:#fff;box-shadow:0 0 0 6px #8fb09b33}
+.path .bar.on i{transform:scaleX(1)}
+.steplabels{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin:-16px 0 20px}
+
+.btn{border:0;cursor:pointer;font:600 15px Figtree;padding:12px 22px;border-radius:999px;background:var(--clay);color:#fff;box-shadow:0 8px 18px #c07a5a40;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 22px #c07a5a55}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.btn.soft{background:#efe7d9;color:var(--ink);box-shadow:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=text]{font:500 14px Figtree;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;width:140px;color:var(--ink)}
+input[type=text]:focus{outline:none;border-color:var(--sage)}
+
+section.chap{margin-top:26px}
+.chap h2{font-size:21px;display:flex;align-items:baseline;gap:10px}
+.chap h2 .hand{font-size:22px;color:var(--soft);font-weight:500}
+.hidden{display:none!important}
+
+.clues{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.clue{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:12px;position:relative;opacity:0;transform:translateY(10px);animation:in .5s forwards;transition:.3s}
+.clue:hover{transform:translateY(-3px)!important;box-shadow:0 10px 20px #0000000f}
+@keyframes in{to{opacity:1;transform:none}}
+.clue .ico{font-size:22px}.clue h4{margin:6px 0 4px;font:600 14px Figtree}
+.clue .state{font-size:12.5px;font-weight:600}
+.loading .state{color:var(--soft)}.loading .ico{animation:spin 1.6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.st-in{color:var(--clay-d)}.st-out{color:var(--sage-d)}.st-err{color:var(--unk)}
+.clue details{font-size:11.5px;margin-top:6px}.clue pre{white-space:pre-wrap;max-height:110px;overflow:auto;background:#faf6ee;border-radius:8px;padding:6px}
+.src{font-size:11.5px;color:var(--soft);margin-top:6px}
+
+.laws{display:grid;gap:12px;margin-top:12px}
+.law{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:start;background:#fff;border-radius:18px;padding:14px 16px;border:1.5px solid var(--line);opacity:0;animation:in .5s forwards;cursor:pointer}
+.law .badge{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:#f4efe4}
+.law h3{font-size:17px}.law .sub{font-size:13px;color:var(--soft)}
+.verdict{font:700 13px Figtree;letter-spacing:.06em;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.v-yes{background:#e3efe6;color:var(--ok)}.v-no{background:#f6e2dc;color:var(--no)}.v-unk{background:#f8eed4;color:var(--unk)}
+.law ul{list-style:none;padding:0;margin:10px 0 0;font-size:13.5px;display:none}
+.law.open ul{display:block}.law li{margin:5px 0;padding-left:22px;position:relative}
+.law li:before{position:absolute;left:0}.law li.p:before{content:"✓";color:var(--ok)}.law li.f:before{content:"✕";color:var(--no)}.law li.u:before{content:"?";color:var(--unk);font-weight:700}
+.law .more{font-size:12.5px;color:var(--soft);margin-top:4px}
+
+.todo{display:grid;gap:8px;margin-top:12px}
+.todo label{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px dashed var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;opacity:0;animation:in .5s forwards;transition:.3s}
+.todo input{accent-color:var(--sage-d);width:18px;height:18px;margin-top:2px}
+.todo label:has(input:checked){background:#eef5f0;border-style:solid;border-color:#cfe0d5}
+.todo label:has(input:checked) b{text-decoration:line-through;color:var(--soft)}
+.todo span{font-size:13.5px;color:var(--soft)}.todo b{color:var(--ink);display:block;font-weight:600}
+
+.search{position:relative;margin-bottom:10px}
+.search input{width:100%;padding:13px 16px 13px 42px;font-size:15px;border-radius:999px}
+.search:before{content:"⌕";position:absolute;left:16px;top:9px;font-size:20px;color:var(--soft)}
+.results{position:absolute;left:0;right:0;top:52px;background:#fff;border-radius:16px;box-shadow:0 14px 30px #0002;z-index:20;overflow:hidden}
+.results div{padding:10px 16px;font-size:14px;cursor:pointer;border-bottom:1px solid #f1ebe0}.results div:hover{background:#f7f2e9}
+.or{font-size:12.5px;color:var(--soft);margin:2px 0 8px}
+.snap{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}
+.fact{background:linear-gradient(160deg,#fff,#faf5ec);border-radius:16px;padding:12px 14px;border:1.5px solid var(--line);opacity:0;animation:in .5s forwards}
+.fact span{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.fact b{display:block;font:600 17px Fraunces;margin-top:3px;word-break:break-word}
+.fact small{display:block;font-size:11.5px;color:var(--soft);margin-top:3px}
+.via{font-size:11px;background:#f8eed4;color:#9a7426;border-radius:999px;padding:1px 8px;margin-left:4px}
+.note{margin-top:26px;font-size:12.5px;color:var(--soft);border-left:3px solid var(--butter);padding:6px 12px;background:#fdf8ec;border-radius:0 10px 10px 0}
+
+/* mission 2: corkboard */
+.board{display:grid;gap:14px;margin-top:16px}
+.lead{display:grid;grid-template-columns:44px 1fr;gap:14px;background:#fff;border-radius:18px;padding:16px;border:1.5px solid var(--line);opacity:0;animation:in .5s forwards;position:relative}
+.lead:nth-child(odd){transform:rotate(-.4deg)}.lead:nth-child(even){transform:rotate(.4deg)}
+.lead .rank{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:700 18px Fraunces;background:#f4efe4}
+.lead:nth-child(1) .rank{background:var(--butter)}.lead:nth-child(2) .rank{background:#e8e4dc}.lead:nth-child(3) .rank{background:var(--rose)}
+.lead h3{font-size:17px}.meta{font-size:12.5px;color:var(--soft);margin:2px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-size:12.5px;padding:4px 10px;border-radius:999px}
+.c-ok{background:#e3efe6;color:var(--ok)}.c-warn{background:#f8eed4;color:#9a7426}
+.scorebar{height:6px;background:#f1ebe0;border-radius:6px;margin-top:10px;overflow:hidden}.scorebar i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),var(--clay));border-radius:6px;transition:width 1s}
+.letter{margin-top:18px;background:#fffaf0;border:1.5px solid var(--line);border-radius:6px;padding:20px 22px;font-size:14px;line-height:1.6;white-space:pre-wrap;box-shadow:4px 4px 0 #efe7d9;position:relative}
+.letter:before{content:"DRAFT · never sent";position:absolute;top:-11px;right:16px;background:var(--clay);color:#fff;font:600 11px Figtree;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+textarea{width:100%;height:120px;font:12.5px ui-monospace,monospace;border:1.5px solid var(--line);border-radius:12px;padding:10px;background:#fff}
+summary{cursor:pointer;color:var(--soft);font-size:13.5px;margin:10px 0}
+.filelabel{display:inline-block}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;background:#fff;border-radius:14px;overflow:hidden}
+.tbl th{background:#f4efe4;text-align:left;padding:8px;font-weight:600;position:sticky;top:0}
+.tbl td{padding:8px;border-top:1px solid #f1ebe0;vertical-align:top}
+.tbl tr:hover td{background:#fbf8f2;cursor:pointer}
+.mini{font:700 10.5px Figtree;letter-spacing:.05em;padding:3px 8px;border-radius:999px;white-space:nowrap;display:inline-block;margin:1px}
+.facts{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:12px}
+.facts label{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:6px 0;cursor:pointer}
+.facts input{accent-color:var(--sage-d);width:17px;height:17px;margin-top:2px}
+.facts small{color:var(--soft)}
+.prog{height:8px;background:#f1ebe0;border-radius:8px;overflow:hidden;margin:10px 0}.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--clay));transition:width .3s}
+.rule{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px;margin-top:12px}
+.rule h3{font-size:16px}.rule .row{margin-top:8px}.rule input[type=text]{width:120px}
+select{font:500 14px Figtree;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);max-width:100%}
+.chk{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-height:180px;overflow:auto}
+.chk label{font-size:12.5px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.chk label:has(input:checked){background:#e3efe6;border-color:#cfe0d5}
+.chk input{display:none}
+
+/* ================= Clean layout + fluid spacing (overrides above) ================= */
+:root{
+ --s1:clamp(4px,.4vw,6px);--s2:clamp(8px,.8vw,12px);--s3:clamp(12px,1.2vw,18px);
+ --s4:clamp(16px,1.8vw,26px);--s5:clamp(22px,2.6vw,36px);--s6:clamp(30px,3.6vw,52px);
+ --r:clamp(14px,1.4vw,22px);--fs:clamp(14px,.35vw + 12.5px,16px);
+ --line:#ece4d6;--shadow:0 1px 2px #3d3a350d,0 8px 24px #3d3a3510;
+}
+body{font-size:var(--fs);background:var(--cream)}
+header{margin:var(--s3) var(--s4) var(--s3);padding:var(--s3) var(--s4) calc(var(--s4) + 14px);gap:var(--s4);box-shadow:var(--shadow);flex-wrap:wrap}
+header h1{font-size:clamp(26px,2.4vw,40px)}
+.tagline{font-size:clamp(12.5px,.9vw,14.5px)}
+.logo{width:clamp(44px,3.6vw,58px);height:clamp(44px,3.6vw,58px)}
+nav{gap:2px}nav button{padding:clamp(7px,.6vw,9px) clamp(10px,1vw,18px);font-size:clamp(12.5px,.85vw,14px)}
+.tourbtn{border:0;cursor:pointer;font:600 13px Figtree;padding:9px 16px;border-radius:999px;background:var(--ink);color:#fff;position:relative;z-index:1}
+.tourbtn:hover{background:#56524b}
+
+.stage{gap:var(--s4);padding:0 var(--s4) var(--s4);grid-template-columns:minmax(0,1.1fr) minmax(360px,1fr)}
+.mapwrap{border:0;box-shadow:var(--shadow)}
+.journal{padding:var(--s5) var(--s5) var(--s6);background-image:none;box-shadow:var(--shadow);scroll-behavior:smooth}
+.journal>div>*+*{margin-top:var(--s3)}
+.guide{gap:var(--s3);margin-bottom:var(--s4)}
+.face{width:clamp(44px,3.4vw,56px);height:clamp(44px,3.4vw,56px);font-size:clamp(22px,1.8vw,28px)}
+.say{padding:var(--s3) var(--s4);font-size:var(--fs)}
+.path{margin:var(--s2) 0 var(--s4)}.steplabels{margin:calc(-1*var(--s3)) 0 var(--s4)}
+section.chap{margin-top:var(--s5)}
+.chap h2{font-size:clamp(18px,1.4vw,21px);padding-bottom:var(--s2);border-bottom:1px solid var(--line)}
+.clues,.snap{gap:var(--s2);margin-top:var(--s3);grid-template-columns:repeat(auto-fill,minmax(clamp(130px,11vw,170px),1fr))}
+.laws,.todo,.board{gap:var(--s2);margin-top:var(--s3)}
+.clue,.fact,.law,.facts,.rule,.lead,.todo label{border:1px solid var(--line);box-shadow:0 1px 2px #3d3a3508}
+.clue,.fact{padding:var(--s3)}.law{padding:var(--s3) var(--s4);gap:var(--s3)}
+.facts,.rule{padding:var(--s3) var(--s4);margin-top:var(--s3)}
+.row{gap:var(--s2)}.search{margin-bottom:var(--s2)}
+.btn{padding:clamp(10px,.8vw,12px) clamp(16px,1.4vw,22px)}
+.note{margin-top:var(--s5)}
+.tbl{border:1px solid var(--line)}.tbl th,.tbl td{padding:var(--s2)}
+.chk{gap:var(--s1)}
+/* tablet: map on top, journal below */
+@media(max-width:1000px){
+ body{height:auto;display:block}
+ .stage{grid-template-columns:1fr;height:auto}
+ .mapwrap{height:clamp(300px,48vh,460px);position:sticky;top:0;z-index:5}
+ .journal{overflow:visible}
+ header{margin-bottom:var(--s3)}
+}
+/* phone: compact header, nav scrolls sideways */
+@media(max-width:620px){
+ header .town,header .sun,.tagline .hand{display:none}
+ header{padding-bottom:var(--s3)}
+ nav{width:100%;overflow-x:auto;margin-left:0}
+ .mapwrap{height:38vh}
+ .law{grid-template-columns:40px 1fr}.law .verdict{grid-column:2;justify-self:start}
+ .law .badge{width:40px;height:40px;font-size:20px}
+ input[type=text]{width:100%}.row>*{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* guided demo tour */
+.tour-hl{position:relative;z-index:1001!important;box-shadow:0 0 0 4px var(--clay),0 0 0 9999px #3d3a3560!important;border-radius:14px}
+.tourcard{position:fixed;z-index:1002;right:var(--s4);bottom:var(--s4);width:min(380px,calc(100vw - 32px));background:var(--paper);border-radius:var(--r);padding:var(--s4);box-shadow:0 20px 50px #0003;animation:in .3s forwards}
+.tourcard h3{font-size:18px;margin-bottom:6px}.tourcard p{margin:0 0 var(--s3);line-height:1.5;font-size:14.5px}
+.tourcard .say-it{background:#f4efe4;border-radius:10px;padding:var(--s2) var(--s3);font-size:13.5px;margin-bottom:var(--s3)}
+.tourcard .say-it b{display:block;font:600 11px Figtree;letter-spacing:.08em;color:var(--soft);text-transform:uppercase;margin-bottom:3px}
+.tourcard .row{justify-content:space-between}.tourcard .count{font-size:12.5px;color:var(--soft)}
+
+/* ================= Calmer, hand-made look (overrides above) ================= */
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-4px}
+header{background:var(--paper);border:1px solid var(--line);box-shadow:none;padding-bottom:var(--s3)}
+header .sun,header .town{display:none}
+.logo{background:var(--ink);border-radius:10px;transform:none;box-shadow:none}.logo:hover{transform:none}
+header h1{font-weight:600}header h1 em{font-weight:400}
+.eyebrow{color:var(--soft)}
+.stat{background:transparent;border-left:1px solid var(--line);border-radius:0;padding:2px 14px;text-align:left;backdrop-filter:none}
+.stat b{font-size:20px}
+.hand{font-family:Figtree,sans-serif;font-size:11.5px!important;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)!important}
+.say .hand{display:block;margin-bottom:4px}
+.chap h2 .hand{margin-left:6px}
+.face{background:transparent!important;border:1px solid var(--line);color:var(--ink);animation:none;box-shadow:none;width:40px!important;height:40px!important;border-radius:10px}
+.say{background:transparent;border-left:2px solid var(--clay);border-radius:0;padding:2px 0 2px var(--s3)}
+.clue .ico,.law .badge{color:var(--ink)}
+.clue .ico .ic,.law .badge .ic{width:22px;height:22px}
+.law .badge{background:transparent;border:1px solid var(--line);border-radius:10px;width:44px;height:44px}
+.loading .ico{animation:none;opacity:.35}
+.clue,.fact,.law,.lead,.todo label{animation:fadein .25s ease-out forwards!important;transform:none!important}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.fact{background:#fff}
+.btn{box-shadow:none;border-radius:10px}.btn:hover{transform:none;filter:brightness(.95);box-shadow:none}
+.tourbtn{border-radius:10px;display:inline-flex;gap:6px;align-items:center}
+nav{border-radius:10px}nav button{border-radius:8px}
+.verdict,.mini,.chip{border-radius:6px}
+.path .on .dot,.path .dot.on{box-shadow:none}
+.pin{background:var(--ink);animation:none}
+.letter{box-shadow:none}.letter:before{border-radius:4px}
+.tour-hl{box-shadow:0 0 0 3px var(--ink),0 0 0 9999px #3d3a3550!important}
+.search:before{content:none}.search .ic{position:absolute;left:14px;top:13px;color:var(--soft)}
+.search input{border-radius:10px}
+summary{display:flex;gap:8px;align-items:center}
+.leaflet-tile-pane{filter:saturate(.55) brightness(1.03)}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-parcel" viewBox="0 0 24 24"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></symbol>
+<symbol id="i-water" viewBox="0 0 24 24"><path d="M3 9c3-2 5 2 9 0s6 2 9 0M3 14c3-2 5 2 9 0s6 2 9 0M3 19c3-2 5 2 9 0s6 2 9 0"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 4 6 6 6 11a6 6 0 01-12 0c0-3 2-4 3-7 1 2 2 3 3 3 0-3-1-5 0-7z"/></symbol>
+<symbol id="i-fault" viewBox="0 0 24 24"><path d="M3 20l5-6 3 3 4-7 3 2 3-9"/></symbol>
+<symbol id="i-reed" viewBox="0 0 24 24"><path d="M3 20h18M7 20V10M12 20V6M17 20v-8"/><ellipse cx="7" cy="8.5" rx="1.2" ry="2"/><ellipse cx="12" cy="4.5" rx="1.2" ry="2"/></symbol>
+<symbol id="i-slope" viewBox="0 0 24 24"><path d="M2 20l7-11 4 6 3-4 6 9z"/></symbol>
+<symbol id="i-liq" viewBox="0 0 24 24"><path d="M3 7h18M3 12c2 0 2-2 4.5-2S10 14 12 14s2-4 4.5-4S19 12 21 12M3 17h18" stroke-dasharray="2 2.5"/></symbol>
+<symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="15" rx="2"/><path d="M5 11h14M8 21v-3M16 21v-3"/><circle cx="8.5" cy="14.5" r=".8"/><circle cx="15.5" cy="14.5" r=".8"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l8-8"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-5h4v5"/></symbol>
+<symbol id="i-chapel" viewBox="0 0 24 24"><path d="M12 2v4M10 4h4M6 21V11l6-5 6 5v10zM10 21v-4a2 2 0 014 0v4"/></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5M3 9h18v2a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0zM5 13v8h14v-8M10 21v-5h4v5"/></symbol>
+<symbol id="i-lots" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M9 4v16M15 4v16M3 12h18"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 01-12 0zM12 17v4"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-6-6-11a6 6 0 0112 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4zM20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+</defs></svg>
+<header>
+ <div class="sun"></div>
+ <svg class="town" viewBox="0 0 1200 46" preserveAspectRatio="none">
+  <path d="M0 30 Q150 14 300 28 T600 26 T900 24 T1200 28 V46 H0Z" fill="#dbe8de"/>
+  <g fill="#c9dccd"><rect x="80" y="18" width="26" height="22"/><path d="M76 19 L93 6 L110 19Z"/><rect x="128" y="22" width="20" height="18"/><path d="M125 23 L138 13 L151 23Z"/>
+  <rect x="470" y="14" width="34" height="26"/><path d="M466 15 L487 2 L508 15Z"/><rect x="520" y="22" width="22" height="18"/><path d="M517 23 L531 12 L545 23Z"/>
+  <rect x="860" y="16" width="28" height="24"/><path d="M856 17 L874 5 L892 17Z"/><rect x="1010" y="20" width="44" height="20"/><path d="M1006 21 L1032 8 L1058 21Z"/></g>
+  <g fill="#e7c3b2"><rect x="600" y="20" width="8" height="8" rx="1"/><circle cx="300" cy="22" r="7"/><circle cx="760" cy="20" r="8"/></g>
+ </svg>
+ <div class="brand">
+  <div class="logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/><circle cx="18.5" cy="5.5" r="2.2" fill="#f3dc9b" stroke="none"/></svg></div>
+  <div><div class="eyebrow">Orange County</div><h1>OC Quote <em>Quest</em></h1>
+  <div class="tagline">Where can the next affordable home go?</div></div>
+ </div>
+ <div class="stats"><div class="stat"><b id="n-sites">0</b><span>sites checked</span></div><div class="stat"><b id="n-clues">0</b><span>layers read</span></div></div>
+ <button class="tourbtn" id="tour"><svg class="ic"><use href="#i-play"/></svg> Demo tour</button>
+ <nav><button class="on" data-v="scout">Scout a site</button><button data-v="find">Find sites</button><button data-v="batch">Check a list</button><button data-v="rules">Rules</button></nav>
+</header>
+<div class="stage">
+ <div class="mapwrap">
+  <div id="map"></div>
+  <div class="coords" id="coords">Orange County, CA</div>
+  <div class="maptip" id="maptip">Click the map to select a site.</div>
+ </div>
+
+ <div class="journal">
+  <!-- ============ SCOUT ============ -->
+  <div id="v-scout">
+   <div class="guide"><div class="face"><svg class="ic"><use href="#i-pin"/></svg></div><div class="say" id="say"><span class="hand">Start here</span>Search an address or click the map. The tool checks the parcel against California's new housing laws and public hazard maps.</div></div>
+   <div class="path" id="path"><div class="dot on">1</div><div class="bar"><i></i></div><div class="dot">2</div><div class="bar"><i></i></div><div class="dot">3</div><div class="bar"><i></i></div><div class="dot">4</div></div>
+   <div class="steplabels"><span>Choose</span><span>Gather clues</span><span>Read the laws</span><span>Next moves</span></div>
+
+   <div class="search"><svg class="ic"><use href="#i-search"/></svg><input type="text" id="q" placeholder="Search an address or place in Orange County…" autocomplete="off"><div class="results hidden" id="results"></div></div>
+   <div class="or">…or tap the map, or type coordinates:</div>
+   <div class="row">
+    <input type="text" id="lat" placeholder="Latitude"><input type="text" id="lon" placeholder="Longitude">
+    <button class="btn" id="go" disabled>Explore this site →</button>
+   </div>
+
+   <div class="facts">
+    <b style="font-family:Fraunces">What you know about this site</b> <small>(these change the answers, and are labelled "you confirmed")</small>
+    <label><input type="checkbox" id="f-owner"><span><b>We own it, and we're a religious institution or nonprofit college.</b><br><small>For SB 4. Free public data can't show owner type, so only you can confirm this.</small></span></label>
+    <label><input type="checkbox" id="f-hist"><span><b>The city confirmed it's not in a historic district or landmark.</b><br><small>For SB 9. There's no single public layer of local historic designations.</small></span></label>
+   </div>
+
+   <section class="chap hidden" id="ch-snap"><h2>Site summary</h2><div class="snap" id="snap"></div></section>
+   <section class="chap hidden" id="ch-clues"><h2>Map layers</h2><div class="clues" id="clues"></div></section>
+   <section class="chap hidden" id="ch-laws"><h2>Law screen <span class="hand">click a law for details</span></h2><div class="laws" id="laws"></div></section>
+   <section class="chap hidden" id="ch-todo"><h2>Next steps</h2><div class="todo" id="todo"></div></section>
+
+   <details class="chap" id="diag"><summary><svg class="ic"><use href="#i-plug"/></svg> Data connections: test which sources are reachable (do this before a demo)</summary>
+    <div class="row"><button class="btn soft" id="testc">Test connections</button><span class="src" id="mode"></span></div>
+    <div class="clues" id="diaglist"></div></details>
+  </div>
+
+  <!-- ============ FIND SITES ============ -->
+  <div id="v-find" class="hidden">
+   <div class="guide"><div class="face"><svg class="ic"><use href="#i-search"/></svg></div><div class="say"><span class="hand">Find sites</span>Choose a city and land-use types such as vacant lots or parking. Matching parcels come from SCAG's land-use map, ranked by size; the largest can be screened against the laws.</div></div>
+   <div class="row"><select id="city"></select><button class="btn soft" id="loadcats">1 · Load land-use types</button></div>
+   <div class="chk" id="cats"></div>
+   <div class="row" style="margin-top:10px"><label class="src">Min lot size (sq ft) <input type="text" id="minsq" value="5000"></label>
+    <button class="btn" id="findgo" disabled>2 · Find parcels</button></div>
+   <div class="src" id="findmsg"></div>
+   <div class="row hidden" id="findact" style="margin-top:8px"><label class="src">Screen the top <input type="text" id="topn" value="15" style="width:60px"> by size</label>
+    <button class="btn alt" id="screentop" style="background:var(--sage-d)">3 · Screen them against the laws</button><button class="btn soft" id="findcsv">Download CSV</button></div>
+   <div class="prog hidden" id="findprog"><i></i></div>
+   <div style="max-height:420px;overflow:auto"><table class="tbl hidden" id="findtbl"><thead><tr><th>#</th><th>Land use</th><th>Lot</th><th>Laws</th><th>Flags</th></tr></thead><tbody></tbody></table></div>
+   <div class="note">Results come from SCAG's existing land-use layer, which can lag behind reality. Click a row to open it in <b>Scout a site</b>. Screening asks about 12 public services per site, so it's capped and runs a few at a time to go easy on public servers.</div>
+  </div>
+
+  <!-- ============ CHECK A LIST ============ -->
+  <div id="v-batch" class="hidden">
+   <div class="guide"><div class="face"><svg class="ic"><use href="#i-list"/></svg></div><div class="say"><span class="hand">Check a list</span>Upload a CSV of sites: candidate sites, a housing-element list, or HCD's surplus-land file. Each row needs latitude/longitude, an APN or an address. Every row gets the full hazard and law check, then a rank.</div></div>
+   <div class="row">
+    <input type="text" id="bcity" placeholder="City filter (optional)">
+    <label class="btn soft filelabel">Upload CSV<input type="file" id="bfile" accept=".csv" hidden></label>
+    <button class="btn soft" id="bsample">Use sample points</button>
+   </div>
+   <p class="src">Surplus land: <a href="https://data.ca.gov/dataset/surplus-land-act-notices-of-availability-received" target="_blank">HCD Surplus Land Act Notices (CSV)</a>. Address lookups are spaced about 1 second apart, as OpenStreetMap asks.</p>
+   <div class="row hidden" id="bact"><button class="btn" id="brun">Run all checks</button><span class="src" id="bmsg"></span><button class="btn soft" id="bcsv">Download results CSV</button></div>
+   <div class="prog hidden" id="bprog"><i></i></div>
+   <div style="max-height:460px;overflow:auto"><table class="tbl hidden" id="btbl"><thead><tr><th>#</th><th>Site</th><th>Laws</th><th>Hazards &amp; flags</th><th>Score*</th></tr></thead><tbody></tbody></table></div>
+   <p class="src hidden" id="bweights">*Score weights are <b>assumptions</b>: each POSSIBLE law +3 · active surplus notice +3 · lot ≥ 10,000 sq ft +2 · vacant or parking use +2 · each mapped hazard (flood, fire, fault, wetland, landslide) −3 · archived notice −2 · each unknown hazard −1.</p>
+   <div class="letter hidden" id="letter"></div>
+  </div>
+
+  <!-- ============ RULES ============ -->
+  <div id="v-rules" class="hidden">
+   <div class="guide"><div class="face"><svg class="ic"><use href="#i-book"/></svg></div><div class="say"><span class="hand">Rules</span>Some legal tests need a number from the statute, such as a lot-size limit. Enter it from the official source with the section and the date checked. Until then, the test stays <i>unknown</i>.</div></div>
+   <div id="rulelist"></div>
+   <div class="rule"><h3>Which exclusions each law checks here</h3>
+    <div class="src" style="font-size:13px;line-height:1.6">
+    <b>SB 9:</b> single-family zone · not a historic district/landmark · not wetland · not fire hazard zone · not FEMA flood zone · not fault zone · lot size (your rule)<br>
+    <b>SB 4:</b> faith/college ownership · not fire hazard zone · not fault zone · not FEMA flood zone · not wetland<br>
+    <b>AB 2011:</b> commercial zone; the corridor and other conditions aren't modelled<br>
+    <b>SB 684 / SB 1123:</b> lot size (your rule); the other conditions aren't modelled<br>
+    These lists follow the Lane 1 brief and HCD fact sheets. They're a screen, not the statute, so verify before relying on them.</div></div>
+   <div class="note">Rules are saved in this browser only. Not legal advice.</div>
+  </div>
+
+  <div class="note">Prototype, <b>not legal or financial advice</b>. Clues come live from public map layers, with the time each was checked. If the data can't answer, the tool says <i>unknown</i> and never guesses yes.</div>
+ </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const ic=n=>`<svg class="ic"><use href="#i-${n}"/></svg>`;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const VIEWS=["scout","find","batch","rules"];
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>show(b.dataset.v));
+function show(v){document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x.dataset.v==v));VIEWS.forEach(id=>$("v-"+id).classList.toggle("hidden",id!=v))}
+
+/* =================== connection: local server (server.py) if running =================== */
+let PROXY=false;
+const ready=(async()=>{if(location.protocol.startsWith("http")){try{PROXY=(await fetch("/proxy/health")).ok}catch(e){}}})();
+const cache=new Map(); // never ask a public server the same thing twice in a session
+async function get(u,ms=25000){await ready;if(cache.has(u))return cache.get(u);
+ const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
+ try{const r=await fetch(PROXY?"/proxy?url="+encodeURIComponent(u):u,{signal:c.signal});
+  let j;try{j=await r.json()}catch(e){throw new Error("HTTP "+r.status+": not a data response")}
+  if(j&&j.error)throw new Error(j.error.message||"service error");cache.set(u,j);return j}
+ catch(e){throw new Error(e.name=="AbortError"?"timed out":String(e.message||e))}finally{clearTimeout(t)}}
+
+/* =================== map (Leaflet from several sources) =================== */
+let map,pin,ring,outline,findLayer,batchLayer;
+function loadOne(base){return new Promise((ok,bad)=>{
+ const css=document.createElement("link");css.rel="stylesheet";css.href=base+"leaflet.css";document.head.appendChild(css);
+ const js=document.createElement("script");js.src=base+"leaflet.js";js.onload=()=>window.L?ok(base):bad();js.onerror=()=>{css.remove();bad()};
+ document.head.appendChild(js);setTimeout(bad,8000)})}
+async function loadLeaflet(){await ready;
+ for(const b of [...(PROXY?["/vendor/"]:[]),"./leaflet/","https://unpkg.com/leaflet@1.9.4/dist/","https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/","https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/"]){try{return await loadOne(b)}catch(e){}}return null}
+loadLeaflet().then(src=>{
+ if(!src){$("maptip").innerHTML="<b>The map library is blocked on this network.</b> Run <code>python3 server.py</code> and open localhost:8000. Search and coordinates still work.";return}
+ map=L.map("map",{zoomControl:false}).setView([33.70,-117.83],11);
+ L.control.zoom({position:"topleft"}).addTo(map);
+ let tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(map),errs=0,swapped=false;
+ tiles.on("tileerror",()=>{if(swapped||++errs<3)return;swapped=true;map.removeLayer(tiles);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{attribution:"Tiles &copy; Esri",maxZoom:19}).addTo(map)});
+ findLayer=L.layerGroup().addTo(map);batchLayer=L.layerGroup().addTo(map);
+ map.on("click",e=>{show("scout");setPoint(e.latlng.lat,e.latlng.lng,true)});
+});
+function setPoint(lat,lon,fromMap){
+ $("lat").value=lat.toFixed(6);$("lon").value=lon.toFixed(6);$("go").disabled=false;
+ $("coords").textContent=lat.toFixed(4)+", "+lon.toFixed(4);
+ if(map){[pin,ring,outline].forEach(x=>x&&map.removeLayer(x));outline=null;
+  pin=L.marker([lat,lon],{icon:L.divIcon({className:"",html:'<div class="pin"></div>',iconSize:[26,26],iconAnchor:[4,26]})}).addTo(map);
+  ring=L.circle([lat,lon],{radius:60,color:"#d99a7b",weight:2,fillColor:"#d99a7b",fillOpacity:.15}).addTo(map);
+  if(!fromMap)map.flyTo([lat,lon],17,{duration:1.2})}
+ $("maptip").innerHTML="Site selected. Run the checks from the panel.";
+ say("Site selected","Press <b>Explore this site</b> to run the checks.");
+}
+["lat","lon"].forEach(id=>$(id).addEventListener("change",()=>{const a=parseFloat($("lat").value),b=parseFloat($("lon").value);if(!isNaN(a)&&!isNaN(b))setPoint(a,b,false)}));
+function say(h,t){$("say").innerHTML=`<span class="hand">${h}</span>${t}`}
+function step(n){[...$("path").children].forEach((k,i)=>{const idx=Math.floor(i/2)+1;k.classList.toggle("on",i%2?idx<n:idx<=n)})}
+
+/* =================== address search (OSM Nominatim: free, no key) =================== */
+const NOMI="https://nominatim.openstreetmap.org/search?format=json&countrycodes=us&bounded=1&viewbox=-118.13,33.95,-117.41,33.38&q=";
+let qTimer;
+$("q").addEventListener("input",()=>{clearTimeout(qTimer);const q=$("q").value.trim();if(q.length<4){$("results").classList.add("hidden");return}
+ qTimer=setTimeout(async()=>{try{const r=await get(NOMI+encodeURIComponent(q)+"&limit=5");
+  $("results").innerHTML=r.length?r.map(x=>`<div data-lat="${esc(x.lat)}" data-lon="${esc(x.lon)}">${esc(x.display_name)}</div>`).join(""):"<div>No match in Orange County. Try adding the city.</div>";
+ }catch(e){$("results").innerHTML="<div>Search is unavailable right now, so tap the map instead.</div>"}$("results").classList.remove("hidden")},700)});
+$("results").onclick=e=>{const d=e.target.closest("[data-lat]");if(!d)return;$("results").classList.add("hidden");$("q").value=d.textContent;setPoint(+d.dataset.lat,+d.dataset.lon,false)};
+
+/* =================== data layers =================== */
+// From lanes/1-find-it/data/DATA-SOURCES.md (verified there 2026-11-06), plus:
+//  - CAL FIRE FHSZ LRA 2025 / SRA 2023 FeatureServers, and USFWS National Wetlands Inventory (public endpoints; checked live by the connection test)
+//  - CGS Alquist-Priolo fault zones: discovered at run time on the state's server, because no stable public URL was confirmed.
+const PARCEL_URL="https://www.ocgis.com/arcpub/rest/services/Map_Layers/Parcels/FeatureServer/0";
+const SCAG_LU="https://maps.scag.ca.gov/scaggis/rest/services/LDX/Existinglanduse_poly_OR/MapServer";
+const LY={
+ zoning:{ico:ic("tag"),name:"Zoning",parts:[{kind:"identify",url:"https://maps.scag.ca.gov/scaggis/rest/services/LDX/Zoning_poly_OR/MapServer"}]},
+ landuse:{ico:ic("grid"),name:"Existing land use",parts:[{kind:"identify",url:SCAG_LU}]},
+ heSite:{ico:ic("doc"),name:"Housing-element site",parts:[{kind:"identify",url:"https://maps.scag.ca.gov/scaggis/rest/services/LDX/HousingElementSite_poly_scag/MapServer"}]},
+ flood:{ico:ic("water"),name:"Flood zone",hazard:true,parts:[{kind:"query",url:"https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",retry:true}],
+  alt:[{name:"OC Floodplains",parts:[{kind:"query",url:"https://www.ocgis.com/arcpub/rest/services/Map_Layers/Floodplains/MapServer/0"}]}]},
+ fire:{ico:ic("flame"),name:"Fire hazard zone",hazard:true,parts:[{kind:"query",url:"https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/FHSALRA25_v1_All/FeatureServer/0"},{kind:"query",url:"https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/FHSZSRA_23_3/FeatureServer/0"}],
+  alt:[{name:"CAL FIRE (older maps)",parts:[{kind:"identify",url:"https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer"}]},{name:"OC Fire zones (LRA)",parts:[{kind:"query",url:"https://www.ocgis.com/arcpub/rest/services/Map_Layers/Fire_Hazard_Severity_Zones_LRA/MapServer/0"}]}]},
+ fault:{ico:ic("fault"),name:"Earthquake fault zone",hazard:true,parts:[{kind:"query",discover:"fault"}]},
+ wetland:{ico:ic("reed"),name:"Wetland (NWI)",hazard:true,parts:[{kind:"envelope",url:"https://fwspublicservices.wim.usgs.gov/wetlandsmapservice/rest/services/Wetlands/MapServer/0"}]},
+ slide:{ico:ic("slope"),name:"Landslide zone",hazard:true,parts:[{kind:"query",url:"https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Landslide_Zones/FeatureServer/0"}]},
+ liq:{ico:ic("liq"),name:"Liquefaction",parts:[{kind:"query",url:"https://www.ocgis.com/arcpub/rest/services/Map_Layers/Liquefaction/MapServer/0"}]},
+ transit:{ico:ic("bus"),name:"Transit area",parts:[{kind:"query",url:"https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHrailroad/CA_HQ_Transit_Areas/FeatureServer/0"}]},
+ ces:{ico:ic("leaf"),name:"CalEnviroScreen",parts:[{kind:"query",url:"https://services1.arcgis.com/PCHfdHz4GlDNAhBb/arcgis/rest/services/calenviroscreen50results_F_070126_gdb/FeatureServer/2"}]}
+};
+// Find the Alquist-Priolo fault-zone layer by name on the state's servers (no guessed URL).
+const discovered={};
+async function discover(what){if(what in discovered)return discovered[what];
+ discovered[what]=(async()=>{
+  const roots=[["https://gis.conservation.ca.gov/server/rest/services","CGS"],["https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services",""]];
+  for(const[root,folder]of roots){try{
+   const j=await get(root+(folder?"/"+folder:"")+"?f=json");
+   const s=(j.services||[]).find(s=>/alquist|ap_?fault|fault_?zone|earthquake_?fault|EFZ/i.test(s.name)&&/Feature|Map/.test(s.type));
+   if(!s)continue;const svc=`${root}/${s.name}/${s.type}`;const m=await get(svc+"?f=json");
+   const lyr=(m.layers||[]).find(l=>/zone/i.test(l.name))||(m.layers||[])[0];if(lyr)return svc+"/"+lyr.id;
+  }catch(e){}}
+  throw new Error("fault-zone layer not found on the state's servers");})();
+ return discovered[what]}
+function urlFor(p,lat,lon,geom){const g=`${lon},${lat}`,d=.002,e=.0003;
+ if(p.kind=="identify")return`${p.url}/identify?geometry=${g}&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=1&mapExtent=${lon-d},${lat-d},${lon+d},${lat+d}&imageDisplay=400,400,96&returnGeometry=false&f=json`;
+ const geo=p.kind=="envelope"?`geometry=${lon-e},${lat-e},${lon+e},${lat+e}&geometryType=esriGeometryEnvelope`:`geometry=${g}&geometryType=esriGeometryPoint`;
+ return`${p.url}/query?${geo}&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=${!!geom}&f=json`}
+async function askPart(p,lat,lon){if(p.discover)p={...p,url:await discover(p.discover)};
+ const n=p.retry?2:1;for(let i=0;i<n;i++){try{const j=await get(urlFor(p,lat,lon));return{feats:(j.features||j.results||[]).map(f=>f.attributes),url:p.url}}catch(e){if(i==n-1)throw e}}}
+// All parts must answer for a "not inside"; any part inside means inside.
+async function askSet(parts,lat,lon){const rs=await Promise.allSettled(parts.map(p=>askPart(p,lat,lon)));
+ const ok=rs.filter(r=>r.status=="fulfilled").map(r=>r.value),feats=ok.flatMap(r=>r.feats);
+ if(feats.length)return{ok:true,feats,url:ok[0].url};
+ if(ok.length==parts.length)return{ok:true,feats:[],url:ok[0].url};
+ throw new Error(rs.find(r=>r.status=="rejected").reason.message)}
+async function hit(l,lat,lon){try{return await askSet(l.parts,lat,lon)}catch(e){
+ for(const a of l.alt||[]){try{return{...(await askSet(a.parts,lat,lon)),via:a.name}}catch(_){}}return{ok:false,err:e.message}}}
+function pick(o,re){if(!o)return null;for(const k in o){const v=o[k];if(re.test(k)&&v!=null&&String(v).trim()!==""&&v!=="Null")return v}return null}
+function areaSqft(rings){const R=6378137,rad=Math.PI/180;let A=0;
+ rings.forEach((ring,ri)=>{let a=0;for(let i=0;i<ring.length-1;i++){const[x1,y1]=ring[i],[x2,y2]=ring[i+1];a+=(x2-x1)*rad*(2+Math.sin(y1*rad)+Math.sin(y2*rad))}A+=Math.abs(a*R*R/2)*(ri?-1:1)});
+ return Math.round(Math.abs(A)*10.7639)}
+function centroid(rings){const r=rings[0];let x=0,y=0;r.forEach(p=>{x+=p[0];y+=p[1]});return[y/r.length,x/r.length]}
+
+/* =================== rules (numbers come from the statute, typed in by the team) =================== */
+const RULE_DEFS=[
+ {id:"sb684max",law:"SB 684 / SB 1123",label:"Maximum lot size (acres)",src:"https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/housing-law-fact-sheets.pdf",note:"The repo notes say limits differ by bill and source. Use the one for your pathway and cite it."},
+ {id:"sb9min",law:"SB 9",label:"Minimum size of each new lot after a split (sq ft)",src:"https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf",note:"The test checks the lot is at least twice this size, so two lots can fit."}
+];
+let RULES=JSON.parse(localStorage.getItem("oqq-rules")||"{}");
+function renderRules(){$("rulelist").innerHTML=RULE_DEFS.map(d=>{const r=RULES[d.id]||{};return`<div class="rule"><h3>${d.law}: ${d.label}</h3>
+ <div class="src">${d.note} <a href="${d.src}" target="_blank">Official source →</a></div>
+ <div class="row"><input type="text" data-r="${d.id}" data-k="v" value="${esc(r.v??"")}" placeholder="number"><input type="text" data-r="${d.id}" data-k="sec" value="${esc(r.sec??"")}" placeholder="statute section" style="width:170px"><input type="text" data-r="${d.id}" data-k="date" value="${esc(r.date??"")}" placeholder="date checked" style="width:130px"></div>
+ <div class="src">${ruleReady(d.id)?"✓ Active: used in law checks":"Not set: this test shows <i>unknown</i>. It needs a number, a section and a date."}</div></div>`}).join("");
+ document.querySelectorAll("[data-r]").forEach(i=>i.onchange=()=>{(RULES[i.dataset.r]??={})[i.dataset.k]=i.value.trim();localStorage.setItem("oqq-rules",JSON.stringify(RULES));renderRules()})}
+function ruleReady(id){const r=RULES[id];return r&&r.v&&!isNaN(parseFloat(r.v))&&r.sec&&r.date}
+function ruleVal(id){return ruleReady(id)?parseFloat(RULES[id].v):null}
+renderRules();
+
+/* =================== the screening engine (used by Scout, Find and Check a list) =================== */
+const SRC={SB9:"https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf",
+ SB4:"https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/aff-hsg-faith-higher-ed-sb-4.pdf",
+ AB2011:"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=65912.101",
+ SB684:"https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/housing-law-fact-sheets.pdf"};
+async function getParcel(lat,lon){try{const j=await get(urlFor({kind:"query",url:PARCEL_URL},lat,lon,true));const f=(j.features||[])[0];if(!f)return{ok:true};
+ const rings=f.geometry&&f.geometry.rings;return{ok:true,a:f.attributes,rings,sqft:rings?areaSqft(rings):null}}catch(e){return{ok:false,err:e.message}}}
+async function screen(lat,lon,facts={},onLayer){
+ const R={};const parcelP=getParcel(lat,lon);
+ await Promise.all(Object.entries(LY).map(async([k,l])=>{R[k]=await hit(l,lat,lon);onLayer&&onLayer(k,R[k])}));
+ return evaluate(R,await parcelP,facts)}
+function evaluate(R,P0,facts){
+ const inside=k=>R[k].ok?R[k].feats.length>0:null;
+ const flood=!R.flood.ok?null:R.flood.via?R.flood.feats.some(f=>/^(A|V)/i.test(String(pick(f,/FLD_ZONE|ZONE/i)||""))):R.flood.feats.some(f=>f.SFHA_TF=="T");
+ const z=R.zoning.ok?R.zoning.feats[0]:null,lu=R.landuse.ok?R.landuse.feats[0]:null,he=R.heSite.ok?R.heSite.feats[0]:null;
+ const zt=z?JSON.stringify(z):"";
+ const sf=R.zoning.ok?(zt?/single|sfr|r-?1\b/i.test(zt):false):null,comm=R.zoning.ok?(zt?/commerc|retail|office/i.test(zt):false):null;
+ const sqft=P0.sqft||null,acres=sqft?sqft/43560:null;
+ const max684=ruleVal("sb684max"),min9=ruleVal("sb9min");
+ const lot684=max684==null||acres==null?null:acres<=max684, lot9=min9==null||sqft==null?null:sqft>=2*min9;
+ const T=(label,v,want,why)=>({label,v,want,why});
+ const laws=[
+  {ico:ic("house"),n:"SB 9",d:"Split a single-family lot or add a duplex",s:SRC.SB9,t:[T("Single-family zone (keyword match on the zoning record, so verify)",sf,true),
+    T(facts.notHistoric?"Not a historic district or landmark (you confirmed with the city)":"Not a historic district or landmark (confirm with the city, then tick the box)",facts.notHistoric?true:null,true),
+    T("Not a mapped wetland",inside("wetland"),false),T("Not in a fire hazard zone",inside("fire"),false),T("Not in a FEMA flood zone",flood,false),T("Not in an earthquake fault zone",inside("fault"),false),
+    T(min9==null?"Lot big enough to split (set the minimum in Rules)":`Lot ≥ 2 × ${min9.toLocaleString()} sq ft (${RULES.sb9min.sec}, checked ${RULES.sb9min.date})`,lot9,true)]},
+  {ico:ic("chapel"),n:"SB 4",d:"Homes on faith or nonprofit-college land",s:SRC.SB4,t:[
+    T(facts.owner?"Owned by a religious institution or nonprofit college (you confirmed)":"Owned by a religious institution or nonprofit college (only the owner can confirm, so tick the box)",facts.owner?true:null,true),
+    T("Not in a fire hazard zone",inside("fire"),false),T("Not in an earthquake fault zone",inside("fault"),false),T("Not in a FEMA flood zone",flood,false),T("Not a mapped wetland",inside("wetland"),false)]},
+  {ico:ic("store"),n:"AB 2011",d:"Homes along commercial corridors",s:SRC.AB2011,t:[T("Commercial zone (keyword match, so verify)",comm,true),T("Corridor width, frontage and other statute conditions (not modelled)",null,true)]},
+  {ico:ic("lots"),n:"SB 684 / SB 1123",d:"Small-lot subdivision, up to 10 homes",s:SRC.SB684,t:[
+    T(max684==null?`Lot size within the limit (lot ≈ ${acres?acres.toFixed(2)+" ac":"unknown"}; set the limit in Rules)`:`Lot ≈ ${acres?acres.toFixed(2):"?"} ac ≤ ${max684} ac (${RULES.sb684max.sec}, checked ${RULES.sb684max.date})`,lot684,true),
+    T("Zoning and other statute conditions (not modelled)",null,true)]}
+ ].map(L=>{const p=[],f=[],u=[];L.t.forEach(x=>x.v==null?u.push(x.label):(x.v===x.want?p:f).push(x.label));return{...L,p,f,u,verdict:f.length?"no":u.length?"unk":"yes"}});
+ const hazards=["flood","fire","fault","wetland","slide"].map(k=>({k,name:LY[k].name,v:k=="flood"?flood:inside(k)}));
+ const apn=P0.a?pick(P0.a,/ASSESSMENT_NO|APN/i):null,addr=P0.a?pick(P0.a,/SITE.?ADD|ADDRESS|SITUS/i):null;
+ const useTxt=pick(lu,/LU|LAND.?USE|DESC/i);
+ return{R,P0,laws,hazards,flood,inside,apn,addr,sqft,acres,useTxt,he,z,zCity:pick(z,/ZN24_CITY|ZONE|ZN/i),zReg:pick(z,/ZN24_SCAG/i),slope:pick(z,/SLOPE/i),
+  reached:Object.values(R).filter(r=>r.ok).length,total:Object.keys(LY).length}}
+const VLBL={yes:"POSSIBLE",no:"RULED OUT",unk:"UNKNOWN"};
+const vchip=(L)=>`<span class="mini v-${L.verdict}" title="${esc(L.n)}">${esc(L.n)}: ${VLBL[L.verdict]}</span>`;
+function scoreOf(S,extra=0){let s=extra;S.laws.forEach(L=>{if(L.verdict=="yes")s+=3});S.hazards.forEach(h=>{if(h.v===true)s-=3;else if(h.v==null)s-=1});
+ if(S.sqft>=10000)s+=2;if(S.useTxt&&/vacant|parking/i.test(S.useTxt))s+=2;return s}
+
+/* =================== SCOUT view =================== */
+const facts=()=>({owner:$("f-owner").checked,notHistoric:$("f-hist").checked});
+let lastS=null;
+["f-owner","f-hist"].forEach(id=>$(id).onchange=()=>{if(lastS){lastS=evaluate(lastS.R,lastS.P0,facts());renderLaws(lastS)}});
+let stats=JSON.parse(localStorage.getItem("sq-stats")||'{"s":0,"c":0}');
+function bump(ds,dc){stats.s+=ds;stats.c+=dc;localStorage.setItem("sq-stats",JSON.stringify(stats));$("n-sites").textContent=stats.s;$("n-clues").textContent=stats.c}
+bump(0,0);
+const fact=(label,val,note,d)=>`<div class="fact" style="animation-delay:${d}s"><span>${label}</span><b>${val==null?'<span style="color:var(--unk);font-size:15px">not stated</span>':esc(val)}</b>${note?`<small>${note}</small>`:""}</div>`;
+function clueHTML(l,r,when){const st=!r.ok?'<div class="state st-err">couldn\'t reach</div>':r.feats.length?'<div class="state st-in">● site is inside</div>':'<div class="state st-out">○ not inside</div>';
+ return`<span class="ico">${l.ico}</span><h4>${l.name}${r.via?'<span class="via">backup</span>':""}</h4>${st}${r.ok&&r.feats.length?`<details><summary>raw data</summary><pre>${esc(JSON.stringify(r.feats.slice(0,2),null,1))}</pre></details>`:""}${!r.ok?`<div class="src">${esc(r.err)}</div>`:""}<div class="src">${r.url?`<a href="${esc(r.url)}" target="_blank">${r.via?esc(r.via):"layer"}</a> · `:""}${when}</div>`}
+function renderLaws(S){$("laws").innerHTML="";S.laws.forEach((L,j)=>$("laws").insertAdjacentHTML("beforeend",`<div class="law" style="animation-delay:${j*.12}s" onclick="this.classList.toggle('open')"><div class="badge">${L.ico}</div>
+ <div><h3>${L.n}</h3><div class="sub">${L.d}</div><ul>${L.p.map(x=>`<li class="p">${esc(x)}</li>`).join("")}${L.f.map(x=>`<li class="f">${esc(x)}</li>`).join("")}${L.u.map(x=>`<li class="u">${esc(x)}</li>`).join("")}<li style="padding:0"><a href="${L.s}" target="_blank" onclick="event.stopPropagation()">Read the official rule →</a></li></ul><div class="more">${L.p.length} passed · ${L.f.length} failed · ${L.u.length} unknown</div></div>
+ <span class="verdict v-${L.verdict}">${VLBL[L.verdict]}</span></div>`))}
+$("go").onclick=()=>scout(parseFloat($("lat").value),parseFloat($("lon").value));
+async function scout(lat,lon){
+ if(!(lat>33&&lat<34.2&&lon>-118.2&&lon<-117.3)){say("Outside the area","This point is outside Orange County.");return}
+ show("scout");$("go").disabled=true;["snap","clues","laws","todo"].forEach(id=>$(id).innerHTML="");["ch-laws","ch-todo"].forEach(id=>$(id).classList.add("hidden"));
+ step(2);$("ch-snap").classList.remove("hidden");$("ch-clues").classList.remove("hidden");
+ say("Checking","Finding the parcel and querying each public map. Results appear as they arrive.");
+ if(map)map.flyTo([lat,lon],17,{duration:1});
+ const when=new Date().toLocaleString();let i=0;
+ for(const[k,l]of Object.entries(LY))$("clues").insertAdjacentHTML("beforeend",`<div class="clue loading" id="c-${k}" style="animation-delay:${i++*.05}s"><span class="ico">${l.ico}</span><h4>${l.name}</h4><div class="state">waiting</div></div>`);
+ const S=lastS=await screen(lat,lon,facts(),(k,r)=>{const el=$("c-"+k);el.classList.remove("loading");el.innerHTML=clueHTML(LY[k],r,when)});
+ if(map&&S.P0.rings){if(outline)map.removeLayer(outline);outline=L.polygon(S.P0.rings.map(r=>r.map(([x,y])=>[y,x])),{color:"#c07a5a",weight:3,dashArray:"6 6",fillColor:"#f3dc9b",fillOpacity:.25}).addTo(map);map.flyToBounds(outline.getBounds(),{padding:[60,60],maxZoom:19,duration:1})}
+ const heCap=S.he?Object.entries(S.he).filter(([k,v])=>/lower|moderate|capacity|units/i.test(k)&&v!=null&&v!=="Null").map(([k,v])=>`${k}: ${v}`).join(", "):null;
+ $("snap").innerHTML=[fact("Address",S.addr,"OC parcel layer",0),fact("APN",S.apn,"OC parcel layer",.05),
+  fact("Lot size",S.sqft?S.sqft.toLocaleString()+" sq ft":null,S.sqft?"estimated from the parcel outline (≈"+S.acres.toFixed(2)+" ac)":"parcel outline unavailable",.1),
+  fact("Zoning",S.zCity,S.zReg?"regional code: "+esc(S.zReg):"SCAG zoning layer",.15),fact("Existing use",S.useTxt,"SCAG existing land use",.2),
+  fact("Slope",S.slope,"SCAG zoning layer (no cutoff applied)",.25),fact("Housing-element site",S.R.heSite.ok?(S.he?"Yes":"No"):null,heCap?esc(heCap):"SCAG housing-element sites",.3)].join("");
+ await wait(300);step(3);$("ch-laws").classList.remove("hidden");renderLaws(S);await wait(500);
+ const nx=[["Who owns it, and would they sell?","Owner type isn't in free parcel data. Try the Assessor roll or a title report"+(S.apn?" for APN "+esc(S.apn):"")+"."],
+  ["Read the city's rules","State law still lets cities set objective standards like parking and setbacks."],
+  ["Call the water & sewer utility","Ask whether there's capacity for new homes."],["Look for contamination","Check state cleanup-site lists (not connected yet)."]];
+ if(!facts().notHistoric)nx.splice(1,0,["Ask the city about historic status","If it isn't historic, tick the box above and SB 9 updates."]);
+ if(S.he)nx.unshift(["It's on the city's housing list","Confirm nothing has been built there since. Existing use says: "+esc(S.useTxt||"not stated")+"."]);
+ if(S.useTxt&&/vacant|parking/i.test(S.useTxt))nx.unshift(["Promising: vacant or parking","Existing land use is "+esc(S.useTxt)+". Underused land is often the easiest to start with."]);
+ if(S.inside("slide")||S.inside("liq"))nx.push(["Plan for a soils study","The site sits in a mapped geologic hazard zone."]);
+ if(S.inside("transit"))nx.push(["Check transit-area rules","It's near frequent transit, so density and parking rules may differ."]);
+ step(4);$("ch-todo").classList.remove("hidden");
+ nx.forEach(([h,t],j)=>$("todo").insertAdjacentHTML("beforeend",`<label style="animation-delay:${j*.08}s"><input type="checkbox"><div><b>${h}</b><span>${t}</span></div></label>`));
+ bump(1,S.reached+(S.P0.a?1:0));
+ const poss=S.laws.filter(L=>L.verdict=="yes").length,no=S.laws.filter(L=>L.verdict=="no").length;
+ const col=no&&!poss?["#c27463","#e7b7ab"]:poss?["#5f8a72","#8fb09b"]:["#c79a3e","#f3dc9b"];
+ [ring,outline].forEach(x=>x&&x.setStyle({color:col[0],fillColor:col[1]}));
+ say(S.reached?"Results":"No response",S.reached?`${S.P0.a?"I found the parcel"+(S.apn?" (APN "+esc(S.apn)+")":"")+" and ":""}heard back from <b>${S.reached} of ${S.total}</b> maps. ${poss?`<b>${poss}</b> law${poss>1?"s":""} could open this site.`:"No law is a clear yes yet."} Anything <i>unknown</i> needs a person, a box ticked above, or a number in Rules.`
+  :"None of the map services answered. Run server.py, then open Data connections below.");
+ $("go").disabled=false}
+
+/* =================== FIND SITES (city-wide search) =================== */
+const OC_CITIES=["Aliso Viejo","Anaheim","Brea","Buena Park","Costa Mesa","Cypress","Dana Point","Fountain Valley","Fullerton","Garden Grove","Huntington Beach","Irvine","La Habra","La Palma","Laguna Beach","Laguna Hills","Laguna Niguel","Laguna Woods","Lake Forest","Los Alamitos","Mission Viejo","Newport Beach","Orange","Placentia","Rancho Santa Margarita","San Clemente","San Juan Capistrano","Santa Ana","Seal Beach","Stanton","Tustin","Villa Park","Westminster","Yorba Linda"];
+$("city").innerHTML=OC_CITIES.map(c=>`<option${c=="Santa Ana"?" selected":""}>${c}</option>`).join("");
+let LUMETA=null,found=[];
+async function luMeta(){if(LUMETA)return LUMETA;const svc=await get(SCAG_LU+"?f=json");const id=(svc.layers||[])[0]?.id??0;const m=await get(`${SCAG_LU}/${id}?f=json`);
+ const fs=m.fields||[];const f=re=>(fs.find(x=>re.test(x.name))||{}).name;
+ LUMETA={url:`${SCAG_LU}/${id}`,city:f(/^CITY$|CITY_NAME|JURIS|^CITY/i),lu:f(/DESC|LU.*NAME|LANDUSE.*D/i)||f(/^LU|LAND_?USE/i),fields:fs.map(x=>x.name)};
+ if(!LUMETA.city||!LUMETA.lu)throw new Error("couldn't identify city / land-use fields. Fields seen: "+LUMETA.fields.join(", "));return LUMETA}
+const sq=s=>String(s).replace(/'/g,"''");
+$("loadcats").onclick=async()=>{$("findmsg").textContent="Reading SCAG land-use categories…";$("cats").innerHTML="";
+ try{const M=await luMeta();const city=$("city").value;
+  const j=await get(`${M.url}/query?where=${encodeURIComponent(`UPPER(${M.city})='${sq(city.toUpperCase())}'`)}&outFields=${M.lu}&returnDistinctValues=true&returnGeometry=false&f=json`);
+  const vals=[...new Set((j.features||[]).map(f=>f.attributes[M.lu]).filter(v=>v!=null&&v!==""))].sort();
+  if(!vals.length){$("findmsg").textContent=`No land-use records for ${city} (field ${M.city}). The city may be named differently in SCAG's data.`;return}
+  $("cats").innerHTML=vals.map(v=>`<label><input type="checkbox" value="${esc(v)}"${/vacant|parking/i.test(v)?" checked":""}>${esc(v)}</label>`).join("");
+  $("findmsg").textContent=`${vals.length} land-use types in ${city}. Vacant and parking are preselected; change as you like.`;$("findgo").disabled=false;
+ }catch(e){$("findmsg").textContent="Couldn't load categories: "+e.message}};
+$("findgo").onclick=async()=>{const M=await luMeta().catch(e=>null);if(!M)return;
+ const sel=[...document.querySelectorAll("#cats input:checked")].map(i=>i.value);if(!sel.length){$("findmsg").textContent="Pick at least one land-use type.";return}
+ const city=$("city").value,min=parseFloat($("minsq").value)||0;
+ $("findmsg").textContent="Pulling matching parcels…";found=[];findLayer&&findLayer.clearLayers();
+ const where=`UPPER(${M.city})='${sq(city.toUpperCase())}' AND ${M.lu} IN (${sel.map(v=>`'${sq(v)}'`).join(",")})`;
+ let off=0,more=true,pages=0;
+ try{while(more&&pages<5){const j=await get(`${M.url}/query?where=${encodeURIComponent(where)}&outFields=*&returnGeometry=true&outSR=4326&maxAllowableOffset=0.00002&resultOffset=${off}&resultRecordCount=1000&f=json`);
+   (j.features||[]).forEach(f=>{const rings=f.geometry&&f.geometry.rings;if(!rings)return;const sqft=areaSqft(rings);if(sqft<min)return;
+    const[lat,lon]=centroid(rings);found.push({lat,lon,sqft,use:f.attributes[M.lu],a:f.attributes,rings})});
+   more=!!j.exceededTransferLimit;off+=1000;pages++}
+ }catch(e){$("findmsg").textContent="Search failed: "+e.message+(PROXY?"":". Try running server.py.");return}
+ found.sort((a,b)=>b.sqft-a.sqft);
+ $("findmsg").innerHTML=`<b>${found.length}</b> parcels in ${esc(city)} over ${min.toLocaleString()} sq ft${more?" (stopped at 5,000 records, so narrow your filters)":""}. Biggest first.`;
+ renderFound();$("findact").classList.remove("hidden");
+ if(map&&found.length){found.slice(0,500).forEach((p,i)=>L.circleMarker([p.lat,p.lon],{radius:5,color:"#c07a5a",weight:1.5,fillColor:"#f3dc9b",fillOpacity:.8}).bindTooltip(`${esc(p.use)} · ${p.sqft.toLocaleString()} sq ft`).on("click",()=>{setPoint(p.lat,p.lon,false);scout(p.lat,p.lon)}).addTo(findLayer));
+  map.fitBounds(L.latLngBounds(found.slice(0,500).map(p=>[p.lat,p.lon])),{padding:[40,40]})}};
+function lawCell(S){return S?S.laws.map(vchip).join(""):'<span class="src">not screened</span>'}
+function flagCell(S){if(!S)return"";return S.hazards.filter(h=>h.v!==false).map(h=>`<span class="chip ${h.v?"c-warn":""}" style="font-size:11px;${h.v?"":"background:#f4efe4;color:#7c7468"}">${h.v?"Inside: ":"Unknown: "}${esc(h.name)}</span>`).join(" ")||'<span class="chip c-ok" style="font-size:11px">no mapped hazards</span>'}
+function renderFound(){const tb=$("findtbl");tb.classList.remove("hidden");
+ tb.querySelector("tbody").innerHTML=found.slice(0,300).map((p,i)=>`<tr data-i="${i}"><td>${i+1}</td><td>${esc(p.use)}</td><td>${p.sqft.toLocaleString()} sq ft<div class="src">${(p.sqft/43560).toFixed(2)} ac</div></td><td>${lawCell(p.S)}</td><td>${flagCell(p.S)}</td></tr>`).join("");
+ tb.querySelectorAll("tr[data-i]").forEach(r=>r.onclick=()=>{const p=found[+r.dataset.i];setPoint(p.lat,p.lon,false);scout(p.lat,p.lon)})}
+async function pool(items,n,fn,prog){let i=0,done=0;const bar=$(prog);bar.classList.remove("hidden");bar.firstElementChild.style.width="0";
+ await Promise.all(Array.from({length:Math.min(n,items.length)},async()=>{while(i<items.length){const k=i++;await fn(items[k],k);done++;bar.firstElementChild.style.width=(done/items.length*100)+"%"}}))}
+$("screentop").onclick=async()=>{const n=Math.min(50,Math.max(1,parseInt($("topn").value)||15));const items=found.slice(0,n);
+ $("screentop").disabled=true;$("findmsg").textContent=`Screening ${items.length} sites, a few at a time…`;
+ await pool(items,3,async p=>{p.S=await screen(p.lat,p.lon,{});renderFound()},"findprog");
+ $("screentop").disabled=false;$("findmsg").textContent=`Screened ${items.length} sites. Click any row to see the full story.`};
+$("findcsv").onclick=()=>csvDownload("oc-sites-"+$("city").value.replace(/\W+/g,"-")+".csv",found.map(p=>({latitude:p.lat.toFixed(6),longitude:p.lon.toFixed(6),land_use:p.use,lot_sqft:p.sqft,...lawCols(p.S),...hazCols(p.S)})));
+
+/* =================== CHECK A LIST (batch) =================== */
+function parseCSV(t){const rows=[];let row=[],c="",q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+  if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
+  else if(ch=='"')q=true;else if(ch==","){row.push(c);c=""}else if(ch=="\n"||ch=="\r"){if(ch=="\r"&&t[i+1]=="\n")i++;row.push(c);rows.push(row);row=[];c=""}else c+=ch}
+ if(c||row.length){row.push(c);rows.push(row)}return rows.filter(r=>r.some(x=>x.trim())).map(r=>r.map(x=>x.trim()))}
+function toSqft(s){const n=parseFloat(String(s).replace(/,/g,""));if(isNaN(n))return null;return /ac/i.test(s)?Math.round(n*43560):Math.round(n)}
+let rows=[];
+function loadRows(h,data){const f=re=>h.findIndex(x=>re.test(x));
+ const ix={lat:f(/^lat|latitude/i),lon:f(/^lon|^lng|longitude/i),apn:f(/apn|parcel.?(no|number)|assessor/i),addr:f(/address|situs/i),city:f(/^city|jurisdiction/i),
+  name:f(/^name|^site|^id$|title/i),status:f(/status/i),size:f(/size|acre/i),contact:f(/contact|email|agency/i)};
+ const g=(r,k)=>ix[k]>=0?(r[ix[k]]||""):"";const cf=$("bcity").value.trim().toLowerCase();
+ rows=data.filter(r=>!cf||g(r,"city").toLowerCase().includes(cf)).map((r,i)=>({name:g(r,"name")||g(r,"addr")||g(r,"apn")||"Row "+(i+1),lat:parseFloat(g(r,"lat")),lon:parseFloat(g(r,"lon")),
+  apn:g(r,"apn"),addr:g(r,"addr"),city:g(r,"city"),status:g(r,"status"),size:g(r,"size"),contact:g(r,"contact")}));
+ $("bact").classList.remove("hidden");
+ const how=[ix.lat>=0&&ix.lon>=0?"coordinates":null,ix.apn>=0?"APN":null,ix.addr>=0?"address":null].filter(Boolean);
+ $("bmsg").textContent=`${rows.length} rows loaded. Locating by: ${how.join(" → ")||"nothing found (needs lat/lon, APN or address columns)"}.`;renderBatch()}
+$("bfile").onchange=async e=>{const[h,...d]=parseCSV(await e.target.files[0].text());loadRows(h,d)};
+$("bsample").onclick=()=>loadRows(["name","latitude","longitude","status","size","contact"],[
+ ["Sample point A (not a real listing)","33.7480","-117.8670","Active","9,005 SF","Demo agency (fictional)"],
+ ["Sample point B (not a real listing)","33.6595","-117.9988","Archive","0.5 acres","Demo agency (fictional)"],
+ ["Sample point C (not a real listing)","33.8353","-117.9145","Active","1.2 ac","Demo agency (fictional)"],
+ ["Sample point D (not a real listing)","33.5427","-117.7854","","6500 SF",""]]);
+async function locate(r){if(!isNaN(r.lat)&&!isNaN(r.lon))return"coordinates";
+ const apn=r.apn.replace(/[^0-9-]/g,"");
+ if(apn){try{const variants=[apn,apn.replace(/-/g,"")];for(const v of variants){
+   const j=await get(`${PARCEL_URL}/query?where=${encodeURIComponent(`ASSESSMENT_NO='${v}'`)}&outFields=ASSESSMENT_NO&returnGeometry=true&outSR=4326&f=json`);
+   const ft=(j.features||[])[0];if(ft&&ft.geometry){[r.lat,r.lon]=centroid(ft.geometry.rings);return"APN"}}}catch(e){}}
+ if(r.addr){await wait(1100);try{const j=await get(NOMI+encodeURIComponent(r.addr+(r.city?", "+r.city:"")+", CA")+"&limit=1");if(j[0]){r.lat=+j[0].lat;r.lon=+j[0].lon;return"address"}}catch(e){}}
+ return null}
+$("brun").onclick=async()=>{$("brun").disabled=true;batchLayer&&batchLayer.clearLayers();
+ await pool(rows,2,async r=>{r.how=await locate(r);if(!r.how){r.err="couldn't locate";return}
+  try{r.S=await screen(r.lat,r.lon,{})}catch(e){r.err=e.message}
+  let extra=0;if(/active|avail/i.test(r.status))extra+=3;if(/archiv/i.test(r.status))extra-=2;
+  r.sqftList=toSqft(r.size);if(r.S&&!r.S.sqft&&r.sqftList)r.S.sqft=r.sqftList;
+  r.score=r.S?scoreOf(r.S,extra):-99;renderBatch()},"bprog");
+ rows.sort((a,b)=>(b.score??-99)-(a.score??-99));renderBatch();$("bweights").classList.remove("hidden");
+ if(map){rows.filter(r=>r.S).forEach((r,i)=>{const poss=r.S.laws.some(L=>L.verdict=="yes"),haz=r.S.hazards.some(h=>h.v);
+  L.circleMarker([r.lat,r.lon],{radius:8,color:haz?"#c27463":poss?"#5f8a72":"#c79a3e",weight:2,fillOpacity:.6}).bindTooltip(`#${i+1} ${esc(r.name)}`).on("click",()=>{setPoint(r.lat,r.lon,false);scout(r.lat,r.lon)}).addTo(batchLayer)});
+  const pts=rows.filter(r=>r.S).map(r=>[r.lat,r.lon]);if(pts.length)map.fitBounds(pts,{padding:[40,40],maxZoom:15})}
+ const top=rows.find(r=>r.S&&r.contact);
+ if(top){$("letter").classList.remove("hidden");$("letter").textContent=`To: ${top.contact}
+Subject: Interest in ${top.name} for affordable housing
+
+Hello,
+
+[Nonprofit name] is a nonprofit affordable housing developer. We're interested in ${top.name}${top.S.apn?" (APN "+top.S.apn+")":""} for affordable homes.
+
+  1. Is it still available, and what is the deadline to respond?
+  2. Are there known site constraints (contamination, easements, utilities)?
+  3. Who is the right contact for next steps?
+
+Warmly,
+[Name]`}
+ $("brun").disabled=false;$("bmsg").textContent=`Done: ${rows.filter(r=>r.S).length} of ${rows.length} rows screened. Click a row to open it.`};
+function renderBatch(){const tb=$("btbl");tb.classList.remove("hidden");
+ tb.querySelector("tbody").innerHTML=rows.map((r,i)=>`<tr data-i="${i}"><td>${i+1}</td><td><b>${esc(r.name)}</b><div class="src">${esc([r.status,r.size,r.how?"located by "+r.how:""].filter(Boolean).join(" · "))}${r.S&&r.S.apn?" · APN "+esc(r.S.apn):""}${r.err?` · <span style="color:var(--no)">${esc(r.err)}</span>`:""}</div></td>
+  <td>${lawCell(r.S)}</td><td>${flagCell(r.S)}</td><td>${r.score!=null&&r.score>-99?r.score:"–"}</td></tr>`).join("");
+ tb.querySelectorAll("tr[data-i]").forEach(t=>t.onclick=()=>{const r=rows[+t.dataset.i];if(r.S){setPoint(r.lat,r.lon,false);scout(r.lat,r.lon)}})}
+$("bcsv").onclick=()=>csvDownload("oc-screened-list.csv",rows.map(r=>({name:r.name,latitude:r.lat||"",longitude:r.lon||"",located_by:r.how||"",apn:r.S?.apn||r.apn,score:r.score??"",...lawCols(r.S),...hazCols(r.S),error:r.err||""})));
+
+/* =================== CSV export =================== */
+function lawCols(S){const o={};(S?.laws||[]).forEach(L=>o[L.n]=VLBL[L.verdict]);return o}
+function hazCols(S){const o={};(S?.hazards||[]).forEach(h=>o[h.name]=h.v==null?"unknown":h.v?"inside":"not inside");return o}
+function csvDownload(name,objs){if(!objs.length)return;const keys=[...new Set(objs.flatMap(Object.keys))];
+ const cell=v=>{let s=String(v??"");if(/^[=+\-@]/.test(s))s="'"+s;return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+ const txt=[keys.join(","),...objs.map(o=>keys.map(k=>cell(o[k])).join(","))].join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/csv"}));a.download=name;a.click()}
+
+/* =================== connection test =================== */
+$("testc").onclick=async()=>{await ready;
+ $("mode").textContent=PROXY?"Mode: through the local server (server.py), so CORS isn't an issue":"Mode: direct from the browser. If many fail, run server.py";
+ const list=[[ic("parcel"),"Parcels (OC)",async()=>PARCEL_URL],[ic("grid"),"SCAG land use (city search)",async()=>SCAG_LU],
+  ...Object.values(LY).flatMap(l=>[...l.parts.map((p,i)=>[l.ico,l.name+(l.parts.length>1?` (${i+1})`:""),async()=>p.discover?await discover(p.discover):p.url]),...(l.alt||[]).map(a=>[l.ico,a.name+" (backup)",async()=>a.parts[0].url])]),
+  [ic("search"),"Address search",async()=>NOMI+"Santa%20Ana&limit=1"]];
+ $("diaglist").innerHTML=list.map(([ico,n],i)=>`<div class="clue loading" id="d${i}"><span class="ico">${ico}</span><h4>${n}</h4><div class="state">testing…</div></div>`).join("");
+ await Promise.all(list.map(async([ico,n,uf],i)=>{let st,u="";const t0=performance.now();
+  try{u=await uf();await get(u.includes("?")?u:u+"?f=json",15000);st=`<div class="state st-out">✓ reachable · ${Math.round(performance.now()-t0)} ms</div>`}
+  catch(e){st=`<div class="state st-err">✕ ${esc(e.message)}</div>`}
+  const el=$("d"+i);el.classList.remove("loading");el.innerHTML=`<span class="ico">${ico}</span><h4>${n}</h4>${st}${u?`<div class="src"><a href="${esc(u)}" target="_blank">open</a></div>`:""}`}))};
+
+
+/* =================== guided demo tour (presenter notes included) =================== */
+const DEMO_PT=[33.7455,-117.8672]; // a sample point in Santa Ana; swap in a site you've rehearsed
+const TOUR=[
+ {t:"The problem",sel:null,view:"scout",p:"California has opened up land for homes with new laws, and the parcel data is public. But nobody has connected the two, so small nonprofits still find sites by luck.",say:"Today a congregation or a one-person nonprofit would need a GIS consultant to answer “could homes go here?” We built the tool they'd use instead."},
+ {t:"1 · One site: a congregation's lot",sel:".search",view:"scout",p:"Search an address or tap the map. The tool finds the exact county parcel, outlines it and works out the lot size.",say:"Meet a made-up facilities chair whose church parking lot sits half-empty all week.",act:"Drop the sample pin",run:()=>setPoint(DEMO_PT[0],DEMO_PT[1],false)},
+ {t:"2 · Only the owner knows some facts",sel:".facts",view:"scout",p:"Public data can't show who owns a parcel. The owner can confirm it here, and the answers say “you confirmed”.",say:"No free dataset says a parcel belongs to a church. We don't guess. We let the owner say so, and we label it.",act:"Tick “we own it” and explore",run:()=>{$("f-owner").checked=true;scout(DEMO_PT[0],DEMO_PT[1])}},
+ {t:"3 · Clues, then the laws",sel:"#ch-laws",fallback:"#go",view:"scout",p:"Twelve public maps answer live: flood, fire, fault, wetland, zoning and more. Each law shows what passed, what failed and what's unknown, with a link to the official rule.",say:"Look at the UNKNOWNs. When the data can't answer, we say so. We never round up to yes."},
+ {t:"4 · Find sites across a city",sel:"#v-find .row",view:"find",p:"For the acquisitions lead: pick a city and the kinds of land (vacant, parking), get every matching parcel ranked by size, and screen the top ones.",say:"Our acquisitions lead asked for ten sites to call this month. Here they are, each with the law that opens it and the hazards to check.",act:"Load land-use types",run:()=>$("loadcats").click()},
+ {t:"5 · Check a whole list",sel:"#v-batch .row",view:"batch",p:"For city staff: upload a list of sites, or the state's surplus-land file. Every row is located, screened, ranked and mapped, with a CSV out.",say:"City staff told us half the sites on their lists turn out to be on a slope or in a fire zone. Now they see that up front.",act:"Use sample points",run:()=>{$("bsample").click();setTimeout(()=>$("brun").click(),300)}},
+ {t:"6 · The rulebook",sel:"#rulelist",view:"rules",p:"Legal numbers like lot-size limits are typed in from the statute, with the section and the date checked. Until then, those tests stay unknown.",say:"We didn't hard-code legal numbers we couldn't verify. Every number has a source and a date."},
+ {t:"7 · Honest about the data",sel:"#diag",view:"scout",p:"Every source is public, reached live, and tested here. Answers are cached so we go easy on public servers.",say:"What doesn't work yet: owner type isn't in free data, zoning is a keyword match, and some cities' data lags. Next, we'd add contamination and utility capacity."}
+];
+let ti=-1,hl=null;
+function tourGo(i){if(hl)hl.classList.remove("tour-hl");document.querySelector(".tourcard")?.remove();ti=i;if(i<0||i>=TOUR.length)return;
+ const S=TOUR[i];show(S.view);
+ let el=S.sel&&document.querySelector(S.sel);if(el&&el.closest(".hidden")&&S.fallback)el=document.querySelector(S.fallback);
+ if(el){hl=el;el.classList.add("tour-hl");el.scrollIntoView({behavior:"smooth",block:"center"})}
+ document.body.insertAdjacentHTML("beforeend",`<div class="tourcard"><h3>${S.t}</h3><p>${S.p}</p><div class="say-it"><b>Say it</b>${S.say}</div>
+  ${S.act?`<button class="btn soft" id="tact" style="width:100%;margin-bottom:10px">${ic("play")} ${S.act}</button>`:""}
+  <div class="row"><span class="count">${i+1} / ${TOUR.length}</span><span><button class="btn soft" id="tprev"${i?"":" disabled"}>Back</button> <button class="btn" id="tnext">${i==TOUR.length-1?"Finish":"Next"}</button></span></div>
+  <div class="src" style="margin-top:8px">Arrow keys move · Esc closes</div></div>`);
+ $("tnext").onclick=()=>tourGo(i+1);$("tprev").onclick=()=>tourGo(i-1);if(S.act)$("tact").onclick=S.run}
+$("tour").onclick=()=>tourGo(0);
+document.addEventListener("keydown",e=>{if(ti<0||ti>=TOUR.length)return;if(e.key=="ArrowRight")tourGo(ti+1);else if(e.key=="ArrowLeft"&&ti>0)tourGo(ti-1);else if(e.key=="Escape")tourGo(-1)});
+if(new URLSearchParams(location.search||"").has("tour"))setTimeout(()=>tourGo(0),800);
+</script>
+</body></html>
